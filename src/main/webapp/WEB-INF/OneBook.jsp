@@ -11,40 +11,30 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Welcome</title>
+    <title>View One Book Page</title>
     <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/main.css"> <!-- change to match your file/naming structure -->
     <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/js/app.js"></script><!-- change to match your file/naming structure -->
 </head>
 <body>
-	<h1>Welcome, <c:out value="${user.username}"/></h1>
-	<p>Books from everyone's shelves.</p>
-	<a href="/auth/logout">logout</a>
-	<a href="/books/new">+ Add to my shelf!</a>
-	<!-- All books list -->
-	<!-- book.id | book.name | book.author | book.user.name -->
-	<!-- the name is a link to /books/${book.id}-->
-	<table>
-		<thead>
-			<tr>
-				<th>ID</th>
-				<th>Title</th>
-				<th>Author Name</th>
-				<th>Posted By</th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach var="onebook" items="${all_books}">
-				<tr>
-					<td><c:out value="${onebook.id}"/></td>
-					<td><a href="/books/${onebook.id}"><c:out value="${onebook.title}"/></a></td>
-					<td><c:out value="${onebook.author}"/></td>
-					<td><c:out value="${onebook.user.username}"/></td>
-				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
+	<!-- Book title -->
+	<h1><c:out value="${selectedBook.title}"/></h1>
+	<!-- welcomepage link -->
+	<a href="/books">back to the shelves</a>
+	<!-- book.user.name read book.title by book.author -->
+	<p><c:out value="${selectedBook.user.username}"/> read <c:out value="${selectedBook.title}"/> by <c:out value="${selectedBook.author}"/>.</p>
+	<!-- Here are book.user's thoughts -->
+	<p>Here are <c:out value="${selectedBook.user.username}"/>'s thoughts:</p>
+	
+	<p><c:out value="${selectedBook.myThoughts}"/></p>
+
+	<!-- edit book.id -->
+	<!-- delete book.id -->	
+	<c:if test="${selectedBook.user.id == userId}">
+		<a href="/books/${selectedBook.id}/edit">Edit</a>
+		<a href="/books/delete/${selectedBook.id}">Delete</a>
+	</c:if>
+
 </body>
 </html>
-

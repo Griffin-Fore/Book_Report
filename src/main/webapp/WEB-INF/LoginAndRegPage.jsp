@@ -18,17 +18,17 @@
     <script type="text/javascript" src="/js/app.js"></script><!-- change to match your file/naming structure -->
 </head>
 <body>
-   <h1>Welcome!</h1>
-   <p>Join our growing community</p>
+   <h1>Book Club</h1>
+   <p>A place for friends to share thoughts on books.</p>
    <!-- Register form -->
    <c:out value="${passwordMatch}"/>
    <c:out value="${invalidEmail}"/>
    <c:out value="${invalidPassword}"/>
    <c:out value="${notLoggedIn}"/>
-   <P>Register</P>
+   <h1>Register</h1>
    		<form:form action="/auth/register" method="POST" modelAttribute="Register">
    		
-   			<form:label path="username" class="form-label">Username:</form:label>
+   			<form:label path="username" class="form-label">Name:</form:label>
    			<form:input path="username" class="form-control"/>
    			<form:errors path="username"/>
    			
@@ -40,7 +40,7 @@
    			<form:input type="password" path="password" class="form-control"/>
    			<form:errors path="password"/>
    			
-   			<form:label path="confirmPassword" class="form-label">Confirm Password:</form:label>
+   			<form:label path="confirmPassword" class="form-label">Confirm PW:</form:label>
    			<form:input type="password" path="confirmPassword" class="form-control"/>
    			<form:errors path="confirmPassword"/>
    			
@@ -48,7 +48,7 @@
    		</form:form>
    		
    <!-- Login form -->
-   		<p>Log In</p>
+   		<h1>Log In</h1>
    		<form:form action="/auth/login" method="POST" modelAttribute="LoginPath">
    			<form:label path="email" class="form-label">Email:</form:label>
    			<form:input type="email" path="email" class="form-control"/>

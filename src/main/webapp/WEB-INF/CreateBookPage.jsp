@@ -11,40 +11,31 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Welcome</title>
+    <title>Book Creation Page</title>
     <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/main.css"> <!-- change to match your file/naming structure -->
     <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/js/app.js"></script><!-- change to match your file/naming structure -->
 </head>
 <body>
-	<h1>Welcome, <c:out value="${user.username}"/></h1>
-	<p>Books from everyone's shelves.</p>
-	<a href="/auth/logout">logout</a>
-	<a href="/books/new">+ Add to my shelf!</a>
-	<!-- All books list -->
-	<!-- book.id | book.name | book.author | book.user.name -->
-	<!-- the name is a link to /books/${book.id}-->
-	<table>
-		<thead>
-			<tr>
-				<th>ID</th>
-				<th>Title</th>
-				<th>Author Name</th>
-				<th>Posted By</th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach var="onebook" items="${all_books}">
-				<tr>
-					<td><c:out value="${onebook.id}"/></td>
-					<td><a href="/books/${onebook.id}"><c:out value="${onebook.title}"/></a></td>
-					<td><c:out value="${onebook.author}"/></td>
-					<td><c:out value="${onebook.user.username}"/></td>
-				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
+	<h1>Add a Book to Your Shelf</h1>
+	<a href="/books">back to the shelves</a>
+	
+	<form:form action="/create_book" method="POST" modelAttribute="NewBook">
+	
+		<form:label path="title">Title:</form:label>
+		<form:input path="title"/>
+		<form:errors path="title"/>
+		
+		<form:label path="author">Author: </form:label>
+		<form:input path="author"/>
+		<form:errors path="author"/>
+		
+		<form:label path="myThoughts">My thoughts:</form:label>
+		<form:input path="myThoughts"/>
+		<form:errors path="myThoughts"/>
+
+		<button type="submit">Submit</button>
+	</form:form>
 </body>
 </html>
-

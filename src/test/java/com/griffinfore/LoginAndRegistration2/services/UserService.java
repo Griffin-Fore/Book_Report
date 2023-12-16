@@ -1,12 +1,12 @@
 package com.griffinfore.LoginAndRegistration2.services;
-
 import java.util.ArrayList;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.griffinfore.LoginAndRegistration2.models.User;
 import com.griffinfore.LoginAndRegistration2.repositories.UserRepository;
+import com.griffinfore.LoginAndRegistration2.models.User;
 
 @Service
 public class UserService {
@@ -14,7 +14,8 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepo;
 	
-	public ArrayList<User> all(){
+	
+	public ArrayList<User> allUsers(){
 		return userRepo.findAll();
 	}
 	
@@ -26,15 +27,11 @@ public class UserService {
 		return userRepo.save(user);
 	}
 	
-	public User updateUser(User user) {
-		return userRepo.save(user);
-	}
-	
 	public User getByEmail(String email) {
 		return userRepo.findByEmail(email);
 	}
 	
-	public void deleteUser(Long id) {
-		userRepo.deleteById(id);
+	public void deleteUser(User user) {
+		userRepo.delete(user);
 	}
 }

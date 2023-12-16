@@ -68,7 +68,7 @@ public class AuthController {
 		user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
 		User newUser = userService.createUser(user);
 		session.setAttribute("loggedInUser", newUser.getId());
-		return "redirect:/auth/welcomepage";
+		return "redirect:/books";
 	}
 	
 //	A POST route to login with errors that redirects back to the login
@@ -91,21 +91,11 @@ public class AuthController {
 		}
 		
 		session.setAttribute("loggedInUser", userFromDb.getId());
-		return "redirect:/auth/welcomepage";
+		return "redirect:/books";
 		
 	}
 //	a logged in page protected by session
-	@GetMapping("/welcomepage")
-	public String welcomePage(HttpSession session, RedirectAttributes redirectAttributes, Model model) {
-		if(session.getAttribute("loggedInUser") == null) {
-			redirectAttributes.addFlashAttribute("notLoggedIn", "You must be logged in to view this page");
-			return "redirect:/auth/loginandregpage";
-		}
-		Long userId = (Long) session.getAttribute("loggedInUser");
-		User loggedInUser = userService.findOneUser(userId);
-		model.addAttribute("user", loggedInUser);
-		return "WelcomePage.jsp";
-	}
+	
 //	Logout route that clears session
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
